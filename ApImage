@@ -1,0 +1,12 @@
+import java.io.*;
+import java.util.Scanner;
+class ApImage {
+  public ArrayList<Integer> APImage() {
+      return ArrayList<Integer>[][] list = new ArrayList[200][200];
+  }
+  public ArrayList<Integer> APImage(String filename) {
+      filename = "C:\\ImageProcessing\\ApImage\\image.jar";
+      Scanner sc = new Scanner(new File(filename));
+      
+
+        
