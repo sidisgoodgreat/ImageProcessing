@@ -28,6 +28,32 @@ public class ApImage {
    }                                 
    return fileStorer;
   }
+  public APImage(int width, int height) {
+		image=new Pixel[height][width];
+		for(int i=0;i<image.length;i++) {
+			for(Pixel p: image[i]) {
+				p=new Pixel(0,0,0);
+			}
+		}
+	}
+	
+	public int getWidth() {
+		return image.length;
+	}
+	public int getHeight() {
+		return image[0].length;
+	}
+	public Pixel getPixel(int x, int y) {
+		return image[x][y];
+	}
+	public void setPixel(int x, int y, Pixel p) {
+		image[x][y]=p;
+	}
+	
+	
+	public APImage clone() {
+		return
+	}
 
  
 
