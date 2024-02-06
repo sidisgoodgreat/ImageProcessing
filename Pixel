@@ -1,0 +1,42 @@
+public class Pixel {
+private int red;
+private int blue;
+private int green; 
+
+  Pixel(int r, int b, int g) {
+    red = r;
+    blue = b;
+    green = g;
+}
+
+  public int getRed() {
+    return red;
+}
+
+  public int getGreen() {
+    return green;
+}
+
+  public int getBlue() {
+    return blue;
+}
+
+  public void setRed(int r) {
+    red = r;
+}
+
+  public void setGreen(int g) {
+    green = g;
+}
+
+  public void setBlue(int b) {
+    blue = b;
+}
+
+  public Pixel Clone() {
+    
+
+
+      
+    
+    
