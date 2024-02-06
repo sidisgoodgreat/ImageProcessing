@@ -1,12 +1,34 @@
 import java.io.*;
 import java.util.Scanner;
-class ApImage {
-  public ArrayList<Integer> APImage() {
-      return ArrayList<Integer>[][] list = new ArrayList[200][200];
+public class ApImage {
+  public ArrayList<Integer> [][] APImage() {
+      ArrayList<Integer>[][] list = new ArrayList[200][200];
+      return list;
   }
-  public ArrayList<Integer> APImage(String filename) {
-      filename = "C:\\ImageProcessing\\ApImage\\image.jar";
-      Scanner sc = new Scanner(new File(filename));
-      
+  public int[][] APImage(String filename) {
+    int[][] fileStorer = {{1}, {2}};
+    File fileName = new File(filename);
+    Scanner in = new Scanner(fileName);
+    int j = 0;
+    String[] len = in.nextLine().trim().split("\\s+");
+    for (int i = 0; i < len.length; i++) {
+      j++;
+    }  
+    in.close(); 
+    fileStorer = new int[intLength][intLength];
+    in = new Scanner(inFile);
+
+    int lineCount = 0;
+    while (in.hasNextLine()) {
+      String[] currentLine = in.nextLine().trim().split("\\s+"); 
+      for (int i = 0; i < currentLine.length; i++) {
+        fileStorer[lineCount][i] = Integer.parseInt(currentLine[i]);    
+      }
+      lineCount++;
+   }                                 
+   return fileStorer;
+  }
+
+ 
 
         
