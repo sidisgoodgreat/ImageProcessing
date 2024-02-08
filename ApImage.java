@@ -7,12 +7,8 @@ public class APImage {
     private Pixel[][] image;
 	
     public APImage() {
-        image = new Pixel[200][200];
-        for (int i = 0; i < image.length; i++) {
-            for (int j = 0; j < image[i].length; j++) {
-                image[i][j] = new Pixel(0,0,0); 
-            }
-        }
+	    //Insert FILE DIALOG HERE
+        blackImage(200,200);
     }
 	
     public APImage(String filename) {
@@ -30,14 +26,23 @@ public class APImage {
         } catch (FileNotFoundException error) {
             System.err.println("FileNotFoundException: " + error.getMessage());
 
-            image = new Pixel[200][200]; 
-            for (int i = 0; i < image.length; i++) {
-                for (int j = 0; j < image[i].length; j++) {
-                    image[i][j] = new Pixel(0,0,0); 
-                }
-            }
+            blackImage(200,200);
         }
     }
+	public APImage(int width, int height){
+		blackImage(width,height);
+	}
+
+
+	private void blackImage(int width, int height) {
+		//Because height refers to number of rows, height goes first
+		image = new Pixel[height][width];
+		for(int i=0;i<image.length;i++) {
+			for(Pixel p:image[i]) {
+				p=new Pixel(0,0,0);
+			}
+		}
+	}
 
 
     public int getWidth() {
@@ -70,7 +75,9 @@ public class APImage {
 
 
     public String toString() {
-        return "APImage{" + "width=" + getWidth() + ", height=" + getHeight() + '}'; // depends on how we plan to do this
+        return "Filename: "+"filenamegoeshere"+"\n"
+		+"Width: "+getWidth()+"\n"
+		+"Height: "+getHeight(); // depends on how we plan to do this
     }
 
 }
