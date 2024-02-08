@@ -33,7 +33,7 @@ public class APImage {
             image = new Pixel[200][200]; 
             for (int i = 0; i < image.length; i++) {
                 for (int j = 0; j < image[i].length; j++) {
-                    image[i][j] = new Pixel(); 
+                    image[i][j] = new Pixel(0,0,0); 
                 }
             }
         }
