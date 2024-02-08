@@ -8,6 +8,7 @@ public class Pixel {
     red = r;
     green = g;
     blue = b;
+    Pixel.setColor(red,green,blue);
   }
   // returns Pixel's red value
   public int getRed() {
