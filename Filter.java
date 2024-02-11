@@ -54,7 +54,6 @@ public class Filter{
 				
 			}
 		}
-		result.draw();
 		return result;
 	}
 	public APImage sepia(APImage ap) {
