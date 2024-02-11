@@ -105,4 +105,7 @@ public class Filter{
 		}
 		return result;
 	}
+	public APImage enlarge (APImage ap, ) {
+		APImage result = new APImage(ap.getHeight() * , ap.getWidth() * );
+		
 }// end of class
