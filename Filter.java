@@ -170,5 +170,12 @@ public class Filter {
     private int clamp(int value) {
         return Math.max(0, Math.min(value, 255));
     }
+    public APImage shrink (ApImage ap, int factor) {
+        APImage result = ap.clone(ap.getHeight()/factor, ap.getWidth()/factor);
+        //i have no clue tf i do from here
+        for (int i = 0; i < ap.getHeight()/factor , i++) {
+            for (int j = 0; j < ap.getWidth()/factor, j++) {
+                
+    }
 }
 
