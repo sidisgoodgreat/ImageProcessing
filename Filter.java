@@ -172,10 +172,35 @@ public class Filter {
     }
     public APImage shrink (ApImage ap, int factor) {
         APImage result = ap.clone(ap.getHeight()/factor, ap.getWidth()/factor);
-        //i have no clue tf i do from here
-        for (int i = 0; i < ap.getHeight()/factor , i++) {
-            for (int j = 0; j < ap.getWidth()/factor, j++) {
+        //i have no clue if this is right below
+        for (int x = 0; i < ap.getHeight()/factor , i++) {
+            for (int y = 0; j < ap.getWidth()/factor, j++) {
+                int redSum = 0, greenSum = 0, blueSum = 0;
+                int pixelCount = 0;
                 
+                for (int i = 0; i < factor; i++) {
+                    for (int j = 0; j < factor; j++) {
+                        int originalY = y * factor + i;
+                        int originalX = x * factor + j;
+
+                        if (orgX < ap.getHeight() && orgY < ap.getWidth() ) {
+                            Pixel originalPixel = ap.getPixel(originalX, originalY);
+                            redSum += originalPixel.getRed();
+                            blueSum += originalPixel.getBlue();
+                            greenSum += originalPixel.getGreen();
+                            pixelCount++;
+                        }
+                    }
+                }
+                        avgRed = redSum/pixelCount;
+                        avgGreen = greenSum/pixelCount;
+                        avgBlue = blueSum/pixelCount;
+                        result.setPixel(x,y, new Pixel (avgRed, avgGreen, avgBlue);
+                    }
+                }
+        return result;
     }
+
+    public APImage enlarge (APImage ap, int factor) {
 }
 
