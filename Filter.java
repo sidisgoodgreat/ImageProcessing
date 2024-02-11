@@ -1,5 +1,5 @@
 
-public class Filters{
+public class Filter{
   	public APImage blackAndWhite(APImage ap) {
 		APImage result = ap.clone();
 		for(Pixel p: result) {
