@@ -1,6 +1,6 @@
 
 public class Filters(){
-  public APImage blackAndWhite(APImage ap) {
+  	public APImage blackAndWhite(APImage ap) {
 		APImage result = ap.clone();
 		for(Pixel p: result) {
 			int r=p.getRed(),b=p.getBlue(),g=p.getGreen();
