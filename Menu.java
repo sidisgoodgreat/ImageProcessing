@@ -2,8 +2,8 @@ package imageProcessor;
 import images.*;
 import java.util.Scanner;
 public class Menu {
-	APImage ap,clone;
-	Filter f = new Filter();
+	private APImage ap,clone;
+	private Filter f = new Filter();
 	
 	public Menu() {
 		Scanner s = new Scanner(System.in);
