@@ -208,54 +208,53 @@ public class Filter {
     	return result;
     }
     public APImage sharpen(APImage ap, int sharpenAmount, int edgeThreshold) {
-        Pixel[][] pixels = apiToArray(ap);
-        Pixel[][] resultPixels = new Pixel[ap.getWidth()][ap.getHeight()];
+    Pixel[][] pixels = apiToArray(ap);
+    Pixel[][] resultPixels = new Pixel[ap.getWidth()][ap.getHeight()];
 
-        for (int x = 0; x < ap.getWidth(); x++) {
-            resultPixels[x][0] = pixels[x][0].clone();
-            resultPixels[x][ap.getHeight() - 1] = pixels[x][ap.getHeight() - 1].clone();
-        }
-        for (int y = 0; y < ap.getHeight(); y++) {
-            resultPixels[0][y] = pixels[0][y].clone();
-            resultPixels[ap.getWidth() - 1][y] = pixels[ap.getWidth() - 1][y].clone();
-        }
+    resultPixels[0][0] = pixels[0][0].clone();
+    resultPixels[ap.getWidth() - 1][0] = pixels[ap.getWidth() - 1][0].clone();
+    resultPixels[0][ap.getHeight() - 1] = pixels[0][ap.getHeight() - 1].clone();
+    resultPixels[ap.getWidth() - 1][ap.getHeight() - 1] = pixels[ap.getWidth() - 1][ap.getHeight() - 1].clone();
 
-        for (int x = 1; x < ap.getWidth() - 1; x++) {
-            for (int y = 1; y < ap.getHeight() - 1; y++) {
-                Pixel currentPixel = pixels[x][y];
-                int currentLuminance = calculateLuminance(currentPixel);
-                int neighborLuminance = calculateNeighborLuminance(pixels, x, y);
+    for (int x = 1; x < ap.getWidth() - 1; x++) {
+        resultPixels[x][0] = pixels[x][0].clone();
+        resultPixels[x][ap.getHeight() - 1] = pixels[x][ap.getHeight() - 1].clone();
+    }
+    for (int y = 1; y < ap.getHeight() - 1; y++) {
+        resultPixels[0][y] = pixels[0][y].clone();
+        resultPixels[ap.getWidth() - 1][y] = pixels[ap.getWidth() - 1][y].clone();
+    }
 
-                if (Math.abs(currentLuminance - neighborLuminance) > edgeThreshold) {
-                    resultPixels[x][y] = new Pixel(
-                            clamp(currentPixel.getRed() + sharpenAmount),
-                            clamp(currentPixel.getGreen() + sharpenAmount),
-                            clamp(currentPixel.getBlue() + sharpenAmount)
-                    );
-                } else {
-                    resultPixels[x][y] = currentPixel.clone();
+    for (int x = 1; x < ap.getWidth() - 1; x++) {
+        for (int y = 1; y < ap.getHeight() - 1; y++) {
+            Pixel currentPixel = pixels[x][y];
+            int currentLuminance = calculateLuminance(currentPixel);
+
+            int maxLuminanceDiff = 0;
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    if (dx == 0 && dy == 0) continue;
+
+                    Pixel neighborPixel = pixels[x + dx][y + dy];
+                    int neighborLuminance = calculateLuminance(neighborPixel);
+                    int luminanceDiff = Math.abs(currentLuminance - neighborLuminance);
+
+                    maxLuminanceDiff = Math.max(maxLuminanceDiff, luminanceDiff);
                 }
             }
-        }
 
-        return arrayToAPImage(resultPixels);
-    }
-
-    private int calculateNeighborLuminance(Pixel[][] pixels, int x, int y) {
-        int sumLuminance = 0;
-        int count = 0;
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
-                if (dx == 0 && dy == 0) continue;
-                sumLuminance += calculateLuminance(pixels[x + dx][y + dy]);
-                count++;
+            if (maxLuminanceDiff > edgeThreshold) {
+                int darkenedRed = clamp(currentPixel.getRed() - sharpenAmount);
+                int darkenedGreen = clamp(currentPixel.getGreen() - sharpenAmount);
+                int darkenedBlue = clamp(currentPixel.getBlue() - sharpenAmount);
+                resultPixels[x][y] = new Pixel(darkenedRed, darkenedGreen, darkenedBlue);
+            } else {
+                resultPixels[x][y] = currentPixel.clone();
             }
         }
-        return sumLuminance / count;
     }
 
-    private int calculateLuminance(Pixel pixel) {
-    	return (pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3;
+    return arrayToAPImage(resultPixels);
     }
 }
 
