@@ -79,7 +79,7 @@ public class Filter {
     }
 
     public APImage negative(APImage ap) {
-        APImage result = ap.clone();
+        APImage result = grayScale(ap.clone());
         for (Pixel p : result) {
             p.setRed(255 - p.getRed());
             p.setGreen(255 - p.getGreen());
