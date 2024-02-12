@@ -1,10 +1,23 @@
 package imageProcessor;
+package imageProcessor;
 import images.*;
 import java.util.Scanner;
+/**
+ * The Menu class represents the user UI for the Image processing application
+ * It gives the User numerous options and displays the result
+ * @author Ethan, Sid, Manh, Anmol
+ */
 public class Menu {
 	private APImage ap,clone;
 	private Filter f = new Filter();
 	
+	/**
+	 * Construct a new menu object and initializes the image based on user input
+	 * If the user chooses to process a stock image, it loads the "smokey.jpg" image,
+	 * otherwise it initializes a blank object
+	 * 
+	 * author: Ethan
+	 */
 	public Menu() {
 		Scanner s = new Scanner(System.in);
 		
@@ -16,11 +29,15 @@ public class Menu {
 		if("COM".equals(choice)) {
 			ap=new APImage();
 		} else {
-			ap=new APImage("smokey.jpg");
+			ap = new APImage("smokey.jpg");
 		}
 		clone=ap.clone();
 		clone.draw();
 	}
+	/**
+	 * Displays the main menu and processes user input until the user chooses to end the program.
+	 * Author: Anmol
+	 */
 	public void menu() {
 		System.out.println("You are processing: "+"\n"+clone+"\nWhat would you like to do?"+
 				"\nBlack and White - Convert the image to black and white - BW"
@@ -48,6 +65,13 @@ public class Menu {
 		System.out.println("Thank you for using Image Processor. Here is your image along with the original");
 		display();
 	}
+	/**
+	 * Helper method used to input for choosing  from a list of Strings
+	 * Author: Sid
+	 * 
+	 * @param list List of Strings to choose from
+	 * @return the user's chosen string
+	 */
 	private String chooseStringCycle(String[] list) {
 		Scanner s = new Scanner(System.in);
 		String choice = s.nextLine().toUpperCase();
@@ -57,6 +81,15 @@ public class Menu {
 		}
 		return choice;
 	}
+	
+	/**
+	 * Checks if the provided choice is valid among the given list of options.
+	 * Author: Anmol
+	 * 
+	 * @param choice The user's inputed choice
+	 * @param list The List of Options to choose from
+	 * @return True if choice is valid, false if not
+	 */
 	private boolean isOption(String choice,String[] list) {
 		for(String s:list) {
 			if(s.equals(choice)) {
@@ -65,6 +98,14 @@ public class Menu {
 		}
 		return false;
 	}
+	/**
+	 * Helper method to handle user input for choosing an integer within a specified range.
+	 * Author: Manh 
+	 * 
+	 * @param lower The Lower bound of the integer range
+	 * @param upper The Upper bound of the Integer range
+	 * @return The user's chosen integer thats within range
+	 */
 	private int chooseInteger(int lower, int upper) {
 		Scanner s = new Scanner(System.in);
 		System.out.print("Choose a value from "+lower+" to "+upper);
@@ -75,11 +116,23 @@ public class Menu {
 		}
 		return choice;
 	}
+	/**
+	 * Displays the available options and processes the user's choice.
+	 * Author: Sid
+	 * 
+	 * @return The user's chosen choice
+	 */
 	private String optionCycle() {
 		String choice = chooseStringCycle(new String[] {"BW","GS","LGS","90R","90L","180","SEP","DARK"
 				,"BRIGHT","COLOR","POS","NEG","SHARP","BLUR","SHRINK","LARGE","REVERT","END"});
 		return choice;
 	}
+	/**
+	 * Processes the user's chosen image processing operation.
+	 * Author: Ethan
+	 * 
+	 * @param choice The user's chosen operation
+	 */
 	private void imageProcess(String choice) {
 		if("BW".equals(choice)) {
 			clone = f.blackAndWhite(clone);
@@ -122,6 +175,10 @@ public class Menu {
 			clone.draw();
 		}
 	}
+	/**
+	 * Displays the processed image along with the original image if requested by the user.
+	 * Author: Sid
+	 */
 	private void display() {
 		ap.draw();
 		clone.draw();
