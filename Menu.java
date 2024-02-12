@@ -106,7 +106,7 @@ public class Menu {
 		}else if("NEG".equals(choice)) {
 			clone = f.negative(clone);
 		}else if("SHARP".equals(choice)) {
-			//clone = f.sharpen(clone,chooseInteger(0,100));
+			clone = f.sharpen(clone,chooseInteger(0,100));
 		}else if("BLUR".equals(choice)) {
 			clone = f.blur(clone);
 		}else if("SHRINK".equals(choice)) {
