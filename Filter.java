@@ -180,13 +180,11 @@ public class Filter {
 		}
     	return result;
     }
-    //NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE 
-    //NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE NOT DONE 
     public APImage enlarge(APImage ap, int factor) {
-    	APImage result = new APImage(ap.getHeight()*factor,ap.getWidth()*factor);
-    	for(int w=0;w<ap.getWidth();w++) {
-			for(int h=0;h<ap.getHeight();h++) {
-				result.setPixel(w*factor, h*factor, ap.getPixel(w, h));
+    	APImage result = new APImage(ap.getWidth()*factor,ap.getHeight()*factor);
+    	for(int w=0;w<result.getWidth();w++) {
+			for(int h=0;h<result.getHeight();h++) {
+				result.setPixel(w, h, ap.getPixel(w/factor, h/factor));
 			}
 		}
     	return result;
