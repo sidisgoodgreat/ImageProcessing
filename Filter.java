@@ -191,5 +191,23 @@ public class Filter {
 		}
     	return result;
     }
+	private Pixel[][] apiToArray(APImage ap){
+    	Pixel[][] result = new Pixel[ap.getWidth()][ap.getHeight()];
+    	for(int w=0;w<result.length;w++) {
+			for(int h=0;h<result[0].length;h++) {
+				result[w][h]=ap.getPixel(w, h);
+			}
+		}
+    	return result;
+    }
+    private APImage arrayToAPImage(Pixel[][] arr) {
+    	APImage result = new APImage(arr.length,arr[0].length);
+    	for(int w=0;w<result.getWidth();w++) {
+			for(int h=0;h<result.getHeight();h++) {
+				result.setPixel(w, h, arr[w][h]);
+			}
+		}
+    	return result;
+    }
 }
 
