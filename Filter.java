@@ -209,5 +209,31 @@ public class Filter {
 		}
     	return result;
     }
+    public APImage sharpen(APImage ap, int sharpenAmount, int edgeThreshold) {
+        Pixel[][] pixels = apiToArray(ap);
+        Pixel[][] resultPixels = new Pixel[ap.getWidth()][ap.getHeight()];
+
+        resultPixels[0][0] = pixels[0][0].clone(); 
+        resultPixels[ap.getWidth() - 1][0] = pixels[ap.getWidth() - 1][0].clone(); 
+        resultPixels[0][ap.getHeight() - 1] = pixels[0][ap.getHeight() - 1].clone(); 
+        resultPixels[ap.getWidth() - 1][ap.getHeight() - 1] = pixels[ap.getWidth() - 1][ap.getHeight() - 1].clone(); 
+
+        for (int x = 1; x < ap.getWidth() - 1; x++) {
+            resultPixels[x][0] = pixels[x][0].clone(); 
+            resultPixels[x][ap.getHeight() - 1] = pixels[x][ap.getHeight() - 1].clone(); 
+        }
+
+        for (int y = 1; y < ap.getHeight() - 1; y++) {
+            resultPixels[0][y] = pixels[0][y].clone(); 
+            resultPixels[ap.getWidth() - 1][y] = pixels[ap.getWidth() - 1][y].clone(); 
+        }
+
+        for (int x = 1; x < ap.getWidth() - 1; x++) {
+            for (int y = 1; y < ap.getHeight() - 1; y++) {
+            }
+        }
+
+        return arrayToAPImage(resultPixels);
+    }
 }
 
